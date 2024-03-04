@@ -1,0 +1,287 @@
+MySQL Shell 8.0.36
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 8
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| orders             |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.0035 sec)
+ MySQL  localhost:3306 ssl  SQL > CREATE DATABASE HUMAN RESOURCES;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'RESOURCES' at line 1
+ MySQL  localhost:3306 ssl  SQL > CREATE DATABASE HUMAN_RESOURCES;
+Query OK, 1 row affected (0.0118 sec)
+ MySQL  localhost:3306 ssl  SQL > SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| human_resources    |
+| information_schema |
+| mysql              |
+| orders             |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.0012 sec)
+ MySQL  localhost:3306 ssl  SQL > USE HUMAN_RESOURCES
+Default schema set to `HUMAN_RESOURCES`.
+Fetching global names, object names from `human_resources` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  human_resources  SQL > CREATE TABLE datos (Emp_ID INT, Name_Prefix VARCHAR(50), First_Name VARCHAR(50), Middle_Initial CHAR(1), Last_Name VARCHAR(50), Gender ENUM('M', 'F'),  E_Mail VARCHAR(100),  Fathers_Name VARCHAR(100),  Mothers_Name VARCHAR(100),  Mothers_Maiden_Name VARCHAR(100),  Date_of_Birth DATE,  Time_of_Birth TIME,  Age_in_Yrs DECIMAL(5,2),  Weight_in_Kgs DECIMAL(5,2),  Date_of_Joining DATE,  Quarter_of_Joining VARCHAR(10),  Half_of_Joining VARCHAR(10),  Year_of_Joining INT,  Month_of_Joining INT,  Month_Name_of_Joining VARCHAR(20),  Short_Month VARCHAR(3),  Day_of_Joining INT,  DOW_of_Joining INT,  Short_DOW VARCHAR(3),  Age_in_Company_Years DECIMAL(5,2),  Salary DECIMAL(10,2),  Last_Hike DECIMAL(5,2),  SSN VARCHAR(20),  Phone_No VARCHAR(20),  Place_Name VARCHAR(100),  County VARCHAR(100),  City VARCHAR(100),  State VARCHAR(50),  Zip VARCHAR(20),  Region VARCHAR(50),  User_Name VARCHAR(50),  Password VARCHAR(50));
+Query OK, 0 rows affected (0.0334 sec)
+ MySQL  localhost:3306 ssl  human_resources  SQL > DESC HUMAN_RESOURCES;
+ERROR: 1146 (42S02): Table 'human_resources.human_resources' doesn't exist
+ MySQL  localhost:3306 ssl  human_resources  SQL > SHOW TABLEs;
++---------------------------+
+| Tables_in_human_resources |
++---------------------------+
+| datos                     |
++---------------------------+
+1 row in set (0.0079 sec)
+ MySQL  localhost:3306 ssl  human_resources  SQL > DESC datos;
++-----------------------+---------------+------+-----+---------+-------+
+| Field                 | Type          | Null | Key | Default | Extra |
++-----------------------+---------------+------+-----+---------+-------+
+| Emp_ID                | int           | YES  |     | NULL    |       |
+| Name_Prefix           | varchar(50)   | YES  |     | NULL    |       |
+| First_Name            | varchar(50)   | YES  |     | NULL    |       |
+| Middle_Initial        | char(1)       | YES  |     | NULL    |       |
+| Last_Name             | varchar(50)   | YES  |     | NULL    |       |
+| Gender                | enum('M','F') | YES  |     | NULL    |       |
+| E_Mail                | varchar(100)  | YES  |     | NULL    |       |
+| Fathers_Name          | varchar(100)  | YES  |     | NULL    |       |
+| Mothers_Name          | varchar(100)  | YES  |     | NULL    |       |
+| Mothers_Maiden_Name   | varchar(100)  | YES  |     | NULL    |       |
+| Date_of_Birth         | date          | YES  |     | NULL    |       |
+| Time_of_Birth         | time          | YES  |     | NULL    |       |
+| Age_in_Yrs            | decimal(5,2)  | YES  |     | NULL    |       |
+| Weight_in_Kgs         | decimal(5,2)  | YES  |     | NULL    |       |
+| Date_of_Joining       | date          | YES  |     | NULL    |       |
+| Quarter_of_Joining    | varchar(10)   | YES  |     | NULL    |       |
+| Half_of_Joining       | varchar(10)   | YES  |     | NULL    |       |
+| Year_of_Joining       | int           | YES  |     | NULL    |       |
+| Month_of_Joining      | int           | YES  |     | NULL    |       |
+| Month_Name_of_Joining | varchar(20)   | YES  |     | NULL    |       |
+| Short_Month           | varchar(3)    | YES  |     | NULL    |       |
+| Day_of_Joining        | int           | YES  |     | NULL    |       |
+| DOW_of_Joining        | int           | YES  |     | NULL    |       |
+| Short_DOW             | varchar(3)    | YES  |     | NULL    |       |
+| Age_in_Company_Years  | decimal(5,2)  | YES  |     | NULL    |       |
+| Salary                | decimal(10,2) | YES  |     | NULL    |       |
+| Last_Hike             | decimal(5,2)  | YES  |     | NULL    |       |
+| SSN                   | varchar(20)   | YES  |     | NULL    |       |
+| Phone_No              | varchar(20)   | YES  |     | NULL    |       |
+| Place_Name            | varchar(100)  | YES  |     | NULL    |       |
+| County                | varchar(100)  | YES  |     | NULL    |       |
+| City                  | varchar(100)  | YES  |     | NULL    |       |
+| State                 | varchar(50)   | YES  |     | NULL    |       |
+| Zip                   | varchar(20)   | YES  |     | NULL    |       |
+| Region                | varchar(50)   | YES  |     | NULL    |       |
+| User_Name             | varchar(50)   | YES  |     | NULL    |       |
+| Password              | varchar(50)   | YES  |     | NULL    |       |
++-----------------------+---------------+------+-----+---------+-------+
+37 rows in set (0.0069 sec)
+ MySQL  localhost:3306 ssl  human_resources  SQL > LOAD DATA INFILE 'C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\H.csv' INTO TABLE datos FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES;
+
+ERROR: 1292 (22007): Incorrect date value: '5/15/1964' for column 'Date_of_Birth' at row 1
+ MySQL  localhost:3306 ssl  human_resources  SQL > ALTER TABLE datos MODIFY COLUMN Date_of_Birth VARCHAR(20);
+Query OK, 0 rows affected (0.0686 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  human_resources  SQL > DESC datos;
++-----------------------+---------------+------+-----+---------+-------+
+| Field                 | Type          | Null | Key | Default | Extra |
++-----------------------+---------------+------+-----+---------+-------+
+| Emp_ID                | int           | YES  |     | NULL    |       |
+| Name_Prefix           | varchar(50)   | YES  |     | NULL    |       |
+| First_Name            | varchar(50)   | YES  |     | NULL    |       |
+| Middle_Initial        | char(1)       | YES  |     | NULL    |       |
+| Last_Name             | varchar(50)   | YES  |     | NULL    |       |
+| Gender                | enum('M','F') | YES  |     | NULL    |       |
+| E_Mail                | varchar(100)  | YES  |     | NULL    |       |
+| Fathers_Name          | varchar(100)  | YES  |     | NULL    |       |
+| Mothers_Name          | varchar(100)  | YES  |     | NULL    |       |
+| Mothers_Maiden_Name   | varchar(100)  | YES  |     | NULL    |       |
+| Date_of_Birth         | varchar(20)   | YES  |     | NULL    |       |
+| Time_of_Birth         | time          | YES  |     | NULL    |       |
+| Age_in_Yrs            | decimal(5,2)  | YES  |     | NULL    |       |
+| Weight_in_Kgs         | decimal(5,2)  | YES  |     | NULL    |       |
+| Date_of_Joining       | date          | YES  |     | NULL    |       |
+| Quarter_of_Joining    | varchar(10)   | YES  |     | NULL    |       |
+| Half_of_Joining       | varchar(10)   | YES  |     | NULL    |       |
+| Year_of_Joining       | int           | YES  |     | NULL    |       |
+| Month_of_Joining      | int           | YES  |     | NULL    |       |
+| Month_Name_of_Joining | varchar(20)   | YES  |     | NULL    |       |
+| Short_Month           | varchar(3)    | YES  |     | NULL    |       |
+| Day_of_Joining        | int           | YES  |     | NULL    |       |
+| DOW_of_Joining        | int           | YES  |     | NULL    |       |
+| Short_DOW             | varchar(3)    | YES  |     | NULL    |       |
+| Age_in_Company_Years  | decimal(5,2)  | YES  |     | NULL    |       |
+| Salary                | decimal(10,2) | YES  |     | NULL    |       |
+| Last_Hike             | decimal(5,2)  | YES  |     | NULL    |       |
+| SSN                   | varchar(20)   | YES  |     | NULL    |       |
+| Phone_No              | varchar(20)   | YES  |     | NULL    |       |
+| Place_Name            | varchar(100)  | YES  |     | NULL    |       |
+| County                | varchar(100)  | YES  |     | NULL    |       |
+| City                  | varchar(100)  | YES  |     | NULL    |       |
+| State                 | varchar(50)   | YES  |     | NULL    |       |
+| Zip                   | varchar(20)   | YES  |     | NULL    |       |
+| Region                | varchar(50)   | YES  |     | NULL    |       |
+| User_Name             | varchar(50)   | YES  |     | NULL    |       |
+| Password              | varchar(50)   | YES  |     | NULL    |       |
++-----------------------+---------------+------+-----+---------+-------+
+37 rows in set (0.0011 sec)
+ MySQL  localhost:3306 ssl  human_resources  SQL > LOAD DATA INFILE 'C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\H.csv' INTO TABLE datos FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES;
+
+ERROR: 1292 (22007): Incorrect date value: '3/24/2001' for column 'Date_of_Joining' at row 1
+ MySQL  localhost:3306 ssl  human_resources  SQL > ALTER TABLE datos MODIFY COLUMN Date_of_Joining VARCHAR(20);
+Query OK, 0 rows affected (0.1413 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  human_resources  SQL > LOAD DATA INFILE 'C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\H.csv' INTO TABLE datos FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES;
+
+ERROR: 1366 (HY000): Incorrect integer value: 'Saturday' for column 'DOW_of_Joining' at row 1
+ MySQL  localhost:3306 ssl  human_resources  SQL > ALTER TABLE datos MODIFY COLUMN DOW_of_Joining ENUM('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+Query OK, 0 rows affected (0.0745 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  human_resources  SQL > LOAD DATA INFILE 'C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\H.csv' INTO TABLE datos FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES;
+
+ERROR: 1366 (HY000): Incorrect string value: '\xF1a Ana' for column 'County' at row 231
+ MySQL  localhost:3306 ssl  human_resources  SQL > ALTER TABLE datos CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+Query OK, 0 rows affected (0.0699 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  human_resources  SQL > LOAD DATA INFILE 'C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\H.csv' INTO TABLE datos FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES;
+
+ERROR: 1366 (HY000): Incorrect string value: '\xF1a Ana' for column 'County' at row 231
+ MySQL  localhost:3306 ssl  human_resources  SQL > DESC datos;
++-----------------------+------------------------------------------------------------------------------+------+-----+---------+-------+
+| Field                 | Type                                                                         | Null | Key | Default | Extra |
++-----------------------+------------------------------------------------------------------------------+------+-----+---------+-------+
+| Emp_ID                | int                                                                          | YES  |     | NULL    |       |
+| Name_Prefix           | varchar(50)                                                                  | YES  |     | NULL    |       |
+| First_Name            | varchar(50)                                                                  | YES  |     | NULL    |       |
+| Middle_Initial        | char(1)                                                                      | YES  |     | NULL    |       |
+| Last_Name             | varchar(50)                                                                  | YES  |     | NULL    |       |
+| Gender                | enum('M','F')                                                                | YES  |     | NULL    |       |
+| E_Mail                | varchar(100)                                                                 | YES  |     | NULL    |       |
+| Fathers_Name          | varchar(100)                                                                 | YES  |     | NULL    |       |
+| Mothers_Name          | varchar(100)                                                                 | YES  |     | NULL    |       |
+| Mothers_Maiden_Name   | varchar(100)                                                                 | YES  |     | NULL    |       |
+| Date_of_Birth         | varchar(20)                                                                  | YES  |     | NULL    |       |
+| Time_of_Birth         | time                                                                         | YES  |     | NULL    |       |
+| Age_in_Yrs            | decimal(5,2)                                                                 | YES  |     | NULL    |       |
+| Weight_in_Kgs         | decimal(5,2)                                                                 | YES  |     | NULL    |       |
+| Date_of_Joining       | varchar(20)                                                                  | YES  |     | NULL    |       |
+| Quarter_of_Joining    | varchar(10)                                                                  | YES  |     | NULL    |       |
+| Half_of_Joining       | varchar(10)                                                                  | YES  |     | NULL    |       |
+| Year_of_Joining       | int                                                                          | YES  |     | NULL    |       |
+| Month_of_Joining      | int                                                                          | YES  |     | NULL    |       |
+| Month_Name_of_Joining | varchar(20)                                                                  | YES  |     | NULL    |       |
+| Short_Month           | varchar(3)                                                                   | YES  |     | NULL    |       |
+| Day_of_Joining        | int                                                                          | YES  |     | NULL    |       |
+| DOW_of_Joining        | enum('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday') | YES  |     | NULL    |       |
+| Short_DOW             | varchar(3)                                                                   | YES  |     | NULL    |       |
+| Age_in_Company_Years  | decimal(5,2)                                                                 | YES  |     | NULL    |       |
+| Salary                | decimal(10,2)                                                                | YES  |     | NULL    |       |
+| Last_Hike             | decimal(5,2)                                                                 | YES  |     | NULL    |       |
+| SSN                   | varchar(20)                                                                  | YES  |     | NULL    |       |
+| Phone_No              | varchar(20)                                                                  | YES  |     | NULL    |       |
+| Place_Name            | varchar(100)                                                                 | YES  |     | NULL    |       |
+| County                | varchar(100)                                                                 | YES  |     | NULL    |       |
+| City                  | varchar(100)                                                                 | YES  |     | NULL    |       |
+| State                 | varchar(50)                                                                  | YES  |     | NULL    |       |
+| Zip                   | varchar(20)                                                                  | YES  |     | NULL    |       |
+| Region                | varchar(50)                                                                  | YES  |     | NULL    |       |
+| User_Name             | varchar(50)                                                                  | YES  |     | NULL    |       |
+| Password              | varchar(50)                                                                  | YES  |     | NULL    |       |
++-----------------------+------------------------------------------------------------------------------+------+-----+---------+-------+
+MySQL  localhost:3306 ssl  human_resources  SQL > LOAD DATA INFILE 'C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\H.csv' INTO TABLE datos FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES;
+Records: 5000  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  human_resources  SQL > CREATE TABLE Employee_Details (
+                                                ->     Emp_ID INT,
+                                                ->     Date_of_Birth DATE,
+                                                ->     Time_of_Birth TIME
+                                                -> );
+Query OK, 0 rows affected (0.0581 sec)
+ MySQL  localhost:3306 ssl  human_resources  SQL > DESC employee_details
+                                                -> ;
++---------------+------+------+-----+---------+-------+
+| Field         | Type | Null | Key | Default | Extra |
++---------------+------+------+-----+---------+-------+
+| Emp_ID        | int  | YES  |     | NULL    |       |
+| Date_of_Birth | date | YES  |     | NULL    |       |
+| Time_of_Birth | time | YES  |     | NULL    |       |
++---------------+------+------+-----+---------+-------+
+3 rows in set (0.0015 sec)
+ MySQL  localhost:3306 ssl  human_resources  SQL > INSERT INTO Employee_Details (Emp_ID, Date_of_Birth, Time_of_Birth) SELECT Emp_ID, STR_TO_DATE(Date_of_Birth, '%m/%d/%Y'), Time_of_Birth FROM datos;
+Query OK, 5000 rows affected (0.0537 sec)
+ MySQL  localhost:3306 ssl  human_resources  SQL > INSERT INTO Location (Zip, County, Place_Name, City, State)
+                                                -> SELECT DISTINCT Zip, County, Place_Name, City, State
+                                                -> FROM datos;
+Query OK, 4716 rows affected (0.1076 sec)
+
+Records: 4716  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  human_resources  SQL >CREATE TABLE Employee_Data (Emp_ID INT, Name_Prefix VARCHAR(50), First_Name VARCHAR(50), Middle_Initial CHAR(1), Last_Name VARCHAR(50), Gender ENUM('M', 'F'), E_Mail VARCHAR(100), Fathers_Name VARCHAR(100), Mothers_Name VARCHAR(100), Mothers_Maiden_Name VARCHAR(100), Date_of_Joining DATE, Quarter_of_Joining VARCHAR(10), Half_of_Joining VARCHAR(10), Year_of_Joining INT, Month_of_Joining INT, Month_Name_of_Joining VARCHAR(20), Short_Month VARCHAR(3), Day_of_Joining INT, DOW_of_Joining INT, Short_DOW VARCHAR(3), Age_in_Company_Years DECIMAL(5,2), Salary DECIMAL(10,2), Last_Hike DECIMAL(5,2), SSN VARCHAR(20), Phone_No VARCHAR(20), Region VARCHAR(50), User_Name VARCHAR(50), Password VARCHAR(50));
+Query OK, 0 rows affected (0.0344 sec)
+ MySQL  localhost:3306 ssl  human_resources  SQL > DESC employee_data;
++-----------------------+---------------+------+-----+---------+-------+
+| Field                 | Type          | Null | Key | Default | Extra |
++-----------------------+---------------+------+-----+---------+-------+
+| Emp_ID                | int           | YES  |     | NULL    |       |
+| Name_Prefix           | varchar(50)   | YES  |     | NULL    |       |
+| First_Name            | varchar(50)   | YES  |     | NULL    |       |
+| Middle_Initial        | char(1)       | YES  |     | NULL    |       |
+| Last_Name             | varchar(50)   | YES  |     | NULL    |       |
+| Gender                | enum('M','F') | YES  |     | NULL    |       |
+| E_Mail                | varchar(100)  | YES  |     | NULL    |       |
+| Fathers_Name          | varchar(100)  | YES  |     | NULL    |       |
+| Mothers_Name          | varchar(100)  | YES  |     | NULL    |       |
+| Mothers_Maiden_Name   | varchar(100)  | YES  |     | NULL    |       |
+| Date_of_Joining       | date          | YES  |     | NULL    |       |
+| Quarter_of_Joining    | varchar(10)   | YES  |     | NULL    |       |
+| Half_of_Joining       | varchar(10)   | YES  |     | NULL    |       |
+| Year_of_Joining       | int           | YES  |     | NULL    |       |
+| Month_of_Joining      | int           | YES  |     | NULL    |       |
+| Month_Name_of_Joining | varchar(20)   | YES  |     | NULL    |       |
+| Short_Month           | varchar(3)    | YES  |     | NULL    |       |
+| Day_of_Joining        | int           | YES  |     | NULL    |       |
+| DOW_of_Joining        | int           | YES  |     | NULL    |       |
+| Short_DOW             | varchar(3)    | YES  |     | NULL    |       |
+| Age_in_Company_Years  | decimal(5,2)  | YES  |     | NULL    |       |
+| Salary                | decimal(10,2) | YES  |     | NULL    |       |
+| Last_Hike             | decimal(5,2)  | YES  |     | NULL    |       |
+| SSN                   | varchar(20)   | YES  |     | NULL    |       |
+| Phone_No              | varchar(20)   | YES  |     | NULL    |       |
+| Region                | varchar(50)   | YES  |     | NULL    |       |
+| User_Name             | varchar(50)   | YES  |     | NULL    |       |
+| Password              | varchar(50)   | YES  |     | NULL    |       |
++-----------------------+---------------+------+-----+---------+-------+
+28 rows in set (0.0017 sec)
+ MySQL  localhost:3306 ssl  human_resources  SQL > INSERT INTO Employee_Data (Emp_ID, Name_Prefix, First_Name, Middle_Initial, Last_Name, Gender, E_Mail, Fathers_Name, Mothers_Name, Mothers_Maiden_Name, Date_of_Joining, Quarter_of_Joining, Half_of_Joining, Year_of_Joining, Month_of_Joining, Month_Name_of_Joining, Short_Month, Day_of_Joining, DOW_of_Joining, Short_DOW, Age_in_Company_Years, Salary, Last_Hike, SSN, Phone_No, Region, User_Name, Password)
+                                                -> SELECT d.Emp_ID, d.Name_Prefix, d.First_Name, d.Middle_Initial, d.Last_Name, d.Gender, d.E_Mail, d.Fathers_Name, d.Mothers_Name, d.Mothers_Maiden_Name, STR_TO_DATE(d.Date_of_Joining, '%m/%d/%Y'), d.Quarter_of_Joining, d.Half_of_Joining, d.Year_of_Joining, d.Month_of_Joining, d.Month_Name_of_Joining, d.Short_Month, d.Day_of_Joining, d.DOW_of_Joining, d.Short_DOW, d.Age_in_Company_Years, d.Salary, d.Last_Hike, d.SSN, d.Phone_No, d.Region, d.User_Name, d.Password
+                                                -> FROM datos AS d;
+Query OK, 5000 rows affected (0.1464 sec)
+
+Records: 5000  Duplicates: 0  Warnings: 0

@@ -1,0 +1,211 @@
+MySQL Shell 8.0.36
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 12
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > show DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| human_resources    |
+| information_schema |
+| mysql              |
+| orders             |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.0011 sec)
+ MySQL  localhost:3306 ssl  SQL > CREATE DATABASE datos
+                               -> ;
+Query OK, 1 row affected (0.0137 sec)
+ MySQL  localhost:3306 ssl  SQL > SHOW TABLEs;
+ERROR: 1046 (3D000): No database selected
+ MySQL  localhost:3306 ssl  SQL > DROP DATABASE datos;
+Query OK, 0 rows affected (0.0151 sec)
+ MySQL  localhost:3306 ssl  SQL > CREATE DATABASE CREDIT_CARDS;
+Query OK, 1 row affected (0.0095 sec)
+ MySQL  localhost:3306 ssl  SQL > SHOW TABLEs;
+ERROR: 1046 (3D000): No database selected
+ MySQL  localhost:3306 ssl  SQL > show DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| credit_cards       |
+| human_resources    |
+| information_schema |
+| mysql              |
+| orders             |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+9 rows in set (0.0013 sec)
+ MySQL  localhost:3306 ssl  SQL > use CREDIT_CARDS;
+Default schema set to `CREDIT_CARDS`.
+Fetching global names, object names from `credit_cards` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  credit_cards  SQL > CREATE TABLE datos;
+ERROR: 4028 (HY000): A table must have at least one visible column.
+ MySQL  localhost:3306 ssl  credit_cards  SQL > CREATE TABLE datos (Card_Type ENUM('American Express', 'Master Card', 'Diners Club International', 'Visa', 'Japan Credit Bureau', 'Discover'), Issuing_Bank ENUM('American Express', 'Citibank', 'Diners Club', 'GE Capital', 'JCB', 'Chase', 'Barclays', 'Discover', 'Bank of America', 'PNC', 'First National', 'USAA', 'U.S. Bancorp', 'Cabela’s WFB', 'Capital One', 'Wells Fargo'), Card_Number VARCHAR(20), Card_Holders_Name VARCHAR(50), CVV_CVV2 VARCHAR(6), Issue_Date DATE, Expiry_Date DATE, Billing_Date DATE, Card_PIN VARCHAR(5), Credit_Limit DECIMAL(10,2));
+Query OK, 0 rows affected (0.0370 sec)
+ MySQL  localhost:3306 ssl  credit_cards  SQL > DESC TABLE datos
+                                             -> ;
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | datos | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    1 |      100 | NULL  |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+1 row in set, 1 warning (0.0047 sec)
+Note (code 1003): /* select#1 */ select `credit_cards`.`datos`.`Card_Type` AS `Card_Type`,`credit_cards`.`datos`.`Issuing_Bank` AS `Issuing_Bank`,`credit_cards`.`datos`.`Card_Number` AS `Card_Number`,`credit_cards`.`datos`.`Card_Holders_Name` AS `Card_Holders_Name`,`credit_cards`.`datos`.`CVV_CVV2` AS `CVV_CVV2`,`credit_cards`.`datos`.`Issue_Date` AS `Issue_Date`,`credit_cards`.`datos`.`Expiry_Date` AS `Expiry_Date`,`credit_cards`.`datos`.`Billing_Date` AS `Billing_Date`,`credit_cards`.`datos`.`Card_PIN` AS `Card_PIN`,`credit_cards`.`datos`.`Credit_Limit` AS `Credit_Limit` from `credit_cards`.`datos`
+ MySQL  localhost:3306 ssl  credit_cards  SQL > SHOW TABLE datos
+                                             -> ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datos' at line 1
+ MySQL  localhost:3306 ssl  credit_cards  SQL > DESC TABLE datos;
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | datos | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    1 |      100 | NULL  |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+1 row in set, 1 warning (0.0007 sec)
+Note (code 1003): /* select#1 */ select `credit_cards`.`datos`.`Card_Type` AS `Card_Type`,`credit_cards`.`datos`.`Issuing_Bank` AS `Issuing_Bank`,`credit_cards`.`datos`.`Card_Number` AS `Card_Number`,`credit_cards`.`datos`.`Card_Holders_Name` AS `Card_Holders_Name`,`credit_cards`.`datos`.`CVV_CVV2` AS `CVV_CVV2`,`credit_cards`.`datos`.`Issue_Date` AS `Issue_Date`,`credit_cards`.`datos`.`Expiry_Date` AS `Expiry_Date`,`credit_cards`.`datos`.`Billing_Date` AS `Billing_Date`,`credit_cards`.`datos`.`Card_PIN` AS `Card_PIN`,`credit_cards`.`datos`.`Credit_Limit` AS `Credit_Limit` from `credit_cards`.`datos`
+ MySQL  localhost:3306 ssl  credit_cards  SQL > LOAD DATA INFILE 'C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\g.csv'
+                                             -> INTO TABLE datos
+                                             -> FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+                                             -> LINES TERMINATED BY '\n'
+                                             -> IGNORE 1 LINES;
+ERROR: 1292 (22007): Incorrect date value: '42583' for column 'Issue_Date' at row 1
+ MySQL  localhost:3306 ssl  credit_cards  SQL > LOAD DATA INFILE 'C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\g.csv' INTO TABLE datos FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 LINES;
+ERROR: 1292 (22007): Incorrect date value: '01/08/2016' for column 'Issue_Date' at row 1
+ MySQL  localhost:3306 ssl  credit_cards  SQL > DROP TABLE datos;
+Query OK, 0 rows affected (0.0222 sec)
+ CREATE TABLE datos (Card_Type ENUM('American Express', 'Master Card', 'Diners Club International', 'Visa', 'Japan Credit Bureau', 'Discover'), Issuing_Bank VARCHAR(30), Card_Number VARCHAR(20), Card_Holders_Name VARCHAR(100), CVV_CVV2 VARCHAR(10), Issue_Date VARCHAR(10), Expiry_Date VARCHAR(10), Billing_Date INT, Card_PIN VARCHAR(10), Credit_Limit DECIMAL(10,2));
+ MySQL  localhost:3306 ssl  credit_cards  SQL > LOAD DATA INFILE 'C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\g.csv' INTO TABLE datos FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 LINES;
+ERROR: 1265 (01000): Data truncated for column 'Issuing_Bank' at row 75
+ MySQL  localhost:3306 ssl  credit_cards  SQL > DESC DATOS;
++-------------------+------------------------------------------------------------------------------------------------------------+------+-----+---------+-------+
+| Field             | Type                                                                                                       | Null | Key | Default | Extra |
++-------------------+------------------------------------------------------------------------------------------------------------+------+-----+---------+-------+
+| Card_Type         | enum('American Express','Master Card','Diners Club International','Visa','Japan Credit Bureau','Discover') | YES  |     | NULL    |       |
+| Issuing_Bank      | varchar(30)                                                                                                | YES  |     | NULL    |       |
+| Card_Number       | varchar(20)                                                                                                | YES  |     | NULL    |       |
+| Card_Holders_Name | varchar(100)                                                                                               | YES  |     | NULL    |       |
+| CVV_CVV2          | varchar(10)                                                                                                | YES  |     | NULL    |       |
+| Issue_Date        | varchar(10)                                                                                                | YES  |     | NULL    |       |
+| Expiry_Date       | varchar(10)                                                                                                | YES  |     | NULL    |       |
+| Billing_Date      | int                                                                                                        | YES  |     | NULL    |       |
+| Card_PIN          | varchar(10)                                                                                                | YES  |     | NULL    |       |
+| Credit_Limit      | decimal(10,2)                                                                                              | YES  |     | NULL    |       |
++-------------------+------------------------------------------------------------------------------------------------------------+------+-----+---------+-------+
+10 rows in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  credit_cards  SQL > LOAD DATA INFILE 'C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\g.csv' INTO TABLE datos FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 LINES;
+ERROR: 1265 (01000): Data truncated for column 'Issuing_Bank' at row 75
+ MySQL  localhost:3306 ssl  credit_cards  SQL > LOAD DATA INFILE 'C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\g.csv' INTO TABLE datos FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 LINES;
+ERROR: 1265 (01000): Data truncated for column 'Issuing_Bank' at row 75
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  credit_cards  SQL > LOAD DATA INFILE 'C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\g.csv' INTO TABLE datos FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 LINES;
+ERROR: 1265 (01000): Data truncated for column 'Issuing_Bank' at row 75
+ MySQL  localhost:3306 ssl  credit_cards  SQL > LOAD DATA INFILE 'C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\g.csv' INTO TABLE datos FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 LINES;
+Query OK, 5000 rows affected (0.1512 sec)
+
+Records: 5000  Deleted: 0  Skipped: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  credit_cards  SQL > CREATE TABLE Card_Types (
+                                             ->     Card_Type_ID INT AUTO_INCREMENT PRIMARY KEY,
+                                             ->     Card_Type VARCHAR(50) UNIQUE
+                                             -> );
+Query OK, 0 rows affected (0.0614 sec)
+ MySQL  localhost:3306 ssl  credit_cards  SQL > INSERT INTO Card_Types (Card_Type)
+                                             -> SELECT DISTINCT Card_Type FROM datos;
+Query OK, 6 rows affected (0.0104 sec)
+
+Records: 6  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  credit_cards  SQL > SELECT * FROM Card_Types;
++--------------+---------------------------+
+| Card_Type_ID | Card_Type                 |
++--------------+---------------------------+
+|            1 | American Express          |
+|            3 | Diners Club International |
+|            6 | Discover                  |
+|            5 | Japan Credit Bureau       |
+|            2 | Master Card               |
+|            4 | Visa                      |
++--------------+---------------------------+
+6 rows in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  credit_cards  SQL > DESC card_types;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| Card_Type_ID | int         | NO   | PRI | NULL    | auto_increment |
+| Card_Type    | varchar(50) | YES  | UNI | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+2 rows in set (0.0015 sec)
+ MySQL  localhost:3306 ssl  credit_cards  SQL > CREATE TABLE Issuing_Banks (
+                                             ->     Issuing_Bank_ID INT AUTO_INCREMENT PRIMARY KEY,
+                                             ->     Issuing_Bank VARCHAR(30) UNIQUE
+                                             -> );
+Query OK, 0 rows affected (0.0511 sec)
+ MySQL  localhost:3306 ssl  credit_cards  SQL > INSERT INTO Issuing_Banks (Issuing_Bank)
+                                             -> SELECT DISTINCT Issuing_Bank FROM datos;
+Query OK, 16 rows affected (0.0116 sec)
+
+Records: 16  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  credit_cards  SQL > SELECT * FROM Issuing_Banks
+                                             -> ;
++-----------------+------------------+
+| Issuing_Bank_ID | Issuing_Bank     |
++-----------------+------------------+
+|               1 | American Express |
+|               9 | Bank of America  |
+|               7 | Barclays         |
+|              14 | Cabela’s W       |
+|              15 | Capital One      |
+|               6 | Chase            |
+|               2 | Citibank         |
+|               3 | Diners Club      |
+|               8 | Discover         |
+|              11 | First National   |
+|               4 | GE Capital       |
+|               5 | JCB              |
+|              10 | PNC              |
+|              13 | U.S. Bancorp     |
+|              12 | USAA             |
+|              16 | Wells Fargo      |
++-----------------+------------------+
+16 rows in set (0.0006 sec)
+ MySQL  localhost:3306 ssl  credit_cards  SQL > DESC issuing_banks;
++-----------------+-------------+------+-----+---------+----------------+
+| Field           | Type        | Null | Key | Default | Extra          |
++-----------------+-------------+------+-----+---------+----------------+
+| Issuing_Bank_ID | int         | NO   | PRI | NULL    | auto_increment |
+| Issuing_Bank    | varchar(30) | YES  | UNI | NULL    |                |
++-----------------+-------------+------+-----+---------+----------------+
+2 rows in set (0.0016 sec)
+ MySQL  localhost:3306 ssl  credit_cards  SQL > CREATE TABLE Cards (
+                                             ->     Card_ID INT AUTO_INCREMENT PRIMARY KEY,
+                                             ->     Card_Type_ID INT,
+                                             ->     Issuing_Bank_ID INT,
+                                             ->     Card_Number VARCHAR(20),
+                                             ->     Card_Holders_Name VARCHAR(100),
+                                             ->     CVV_CVV2 VARCHAR(10),
+                                             ->     Issue_Date VARCHAR(10),
+                                             ->     Expiry_Date VARCHAR(10),
+                                             ->     Billing_Date INT, -- Cambiado a INT
+                                             ->     Card_PIN VARCHAR(10),
+                                             ->     Credit_Limit DECIMAL(10,2),
+                                             ->     FOREIGN KEY (Card_Type_ID) REFERENCES Card_Types(Card_Type_ID),
+                                             ->     FOREIGN KEY (Issuing_Bank_ID) REFERENCES Issuing_Banks(Issuing_Bank_ID)
+                                             -> );
+Query OK, 0 rows affected (0.0514 sec)
+ MySQL  localhost:3306 ssl  credit_cards  SQL > INSERT INTO Cards (Card_Type_ID, Issuing_Bank_ID, Card_Number, Card_Holders_Name, CVV_CVV2, Issue_Date, Expiry_Date, Billing_Date, Card_PIN, Credit_Limit) SELECT     ct.Card_Type_ID,     ib.Issuing_Bank_ID,     d.Card_Number,     d.Card_Holders_Name,     d.CVV_CVV2,     d.Issue_Date,     d.Expiry_Date,     d.Billing_Date,     d.Card_PIN,     d.Credit_Limit FROM     datos d     JOIN Card_Types ct ON d.Card_Type = ct.Card_Type     JOIN Issuing_Banks ib ON d.Issuing_Bank = ib.Issuing_Bank;
+Query OK, 5000 rows affected (0.1942 sec)
